@@ -1,0 +1,39 @@
+package com.neu.autojavaappgenerator.Controllers;
+
+import com.neu.autojavaappgenerator.Models.*;
+import com.neu.autojavaappgenerator.Services.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api")
+
+public class !Sample!Controller {
+
+    @Autowired
+    !Sample!Service !_sample!Service;
+
+    @RequestMapping(value = "/!_sample!/", method = RequestMethod.GET)
+    public ResponseEntity<List<!Sample!>> findAll() {
+        List<!Sample!> !_sample! = !_sample!Service.findAll();
+        if (!_sample!.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(!_sample!, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/!_sample!", method = RequestMethod.POST)
+    public ResponseEntity<?> create!Sample!(@RequestBody !Sample! !_sample!) {
+
+        !_sample!Service.save(!_sample!);
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+    
+}

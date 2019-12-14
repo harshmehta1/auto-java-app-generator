@@ -1,0 +1,13 @@
+{
+  "title" : "Group",
+  "type": "object",
+  "properties": {
+    "entity" : true,
+    "gName": {
+      "type": "string"
+    },
+    "gNum": {
+      "type": "integer"
+    }
+  }
+}

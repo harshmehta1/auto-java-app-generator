@@ -1,0 +1,16 @@
+{
+	"title" : "User",
+	"type" : "object",
+	"properties" : {
+		"entity": true,
+		"name": {
+			"type": "string"
+		},
+		"num": {
+			"type": "integer"
+		}
+	},
+		"extends" : {
+			"$ref": "group.json"
+		}
+}
