@@ -11,13 +11,13 @@ import org.jsonschema2pojo.rules.RuleFactory;
 import java.io.*;
 import java.net.URL;
 
-//todo add primary key to entity
-//findXYZByID
 public class JsonReader {
+
+    private static final String jsonFileName = "user";
 
     public static void main(String[] args){
 
-        parseJson();
+        parseJson(jsonFileName);
         String title = readJsonAndGetTitle();
         codeGenerator(title,"src/main/resources/RepoTemplate.txt", "Repository");
         codeGenerator(title, "src/main/resources/ServiceTemplate.txt","Service");
@@ -27,9 +27,9 @@ public class JsonReader {
 
     //Generates code based on the template given. Inserts title into the template to produce legible and usable code.
     //Takes in
-    //title - name to be used for variables/classes
-    //Template - template to be used for generating code
-    //Type - one of three types of code "Repository", "Service", "Controller" - this tells the us where to save the code
+    //    title - name to be used for variables/classes
+    //    Template - template to be used for generating code
+    //    Type - one of three types of code "Repository", "Service", "Controller" - this tells the us where to save the code
 
     private static void codeGenerator(String title, String template, String type){
 
@@ -42,15 +42,14 @@ public class JsonReader {
             File opFile = null;
             switch(type){
                 case "Repository":
-                    opFile = new File("C:\\Users\\Harsh Mehta\\Desktop\\auto-java-app-generator\\" +
-                            "src\\main\\java\\com\\neu\\autojavaappgenerator\\Repository\\"+normalTitle+"Repository.java");
+                    opFile = new File("src\\main\\java\\com\\neu\\autojavaappgenerator\\Repository\\"+normalTitle+"Repository.java");
                     break;
                 case "Service":
-                    opFile = new File("C:\\Users\\Harsh Mehta\\Desktop\\auto-java-app-generator\\" +
+                    opFile = new File(
                             "src\\main\\java\\com\\neu\\autojavaappgenerator\\Services\\"+normalTitle+"Service.java");
                     break;
                 case "Controller":
-                    opFile = new File("C:\\Users\\Harsh Mehta\\Desktop\\auto-java-app-generator\\" +
+                    opFile = new File(
                             "src\\main\\java\\com\\neu\\autojavaappgenerator\\Controllers\\"+normalTitle+"Controller.java");
                     break;
                 default:
@@ -105,14 +104,14 @@ public class JsonReader {
     //Parses json file, creates entity/model classes and annotates the classes.
     //Uses a custom annotator to add "Entity", "Table" and "Column" annotations to the class/fields.
 
-    private static void parseJson(){
+    private static void parseJson(String fileName){
 
 
         JsonReader j = new JsonReader();
         Class cls = j.getClass();
 
         JCodeModel codeModel = new JCodeModel();
-        URL source = cls.getResource("/user.json");
+        URL source = cls.getResource("/"+fileName+".json");
         System.out.println("URL = "+source);
 
         GenerationConfig config = new DefaultGenerationConfig() {
